@@ -5,104 +5,229 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Property Upload</title>
     <style>
-      /*body{
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            width: 90%;
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        label {
-            display: block;
-            margin-top: 20px;
-            margin-bottom: 5px;
-            color: #666;
-        }
-        input[type="text"],
-        input[type="number"],
-        textarea,
-        input[type="file"] {
-            width: calc(100% - 16px);
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        textarea {
-            resize: vertical;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }*/
+      .uploadProperty {
+        max-width: 600px;
+        margin: 20px auto;
+        padding-top: 120px; /* Adjust according to the height of your navbar */
+      }
+      label {
+        display: block;
+        margin: 10px 0 5px;
+      }
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+      }
+      .amenities {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .amenity {
+        flex: 1 0 45%;
+        margin: 5px 0;
+        display: flex;
+        align-items: center;
+      }
+      .amenity label {
+        margin-left: 8px;
+        margin-bottom: 0; /* Add this line */
+      }
+      .amenity input[type="checkbox"] {
+        margin-right: 8px; /* Add this line */
+      }
     </style>
   </head>
-  <body class="uploadProperty">
-    <form id="propertyForm">
-      <h1>Upload Your Property</h1>
+  <body>
+    <nav>
+      <!-- Your existing navbar code -->
+    </nav>
 
-      <label for="propertyName">Property Name:</label>
-      <input
-        type="text"
-        id="propertyName"
-        name="Name"
-        placeholder="Enter property name"
-        required
-      />
+    <div class="uploadProperty">
+      <form id="propertyForm">
+        <h1>Upload Your Property</h1>
 
-      <label for="propertyDescription">Property Description:</label>
-      <textarea
-        id="propertyDescription"
-        name="Description"
-        rows="4"
-        placeholder="Describe the property"
-        required
-      ></textarea>
+        <label for="propertyName">Property Name:</label>
+        <input
+          type="text"
+          id="propertyName"
+          name="Name"
+          placeholder="Enter property name"
+          required
+        />
 
-      <label for="propertyPrice">Asking Price:</label>
-      <input
-        type="number"
-        id="propertyPrice"
-        name="Price"
-        placeholder="Enter asking price"
-        required
-      />
+        <label for="propertyDescription">Property Description:</label>
+        <textarea
+          id="propertyDescription"
+          name="Description"
+          rows="4"
+          placeholder="Describe the property"
+          style="resize: none"
+          required
+        ></textarea>
 
-      <label for="propertyImage">Upload Image:</label>
-      <input
-        type="file"
-        id="propertyImage"
-        name="Image"
-        accept="image/*"
-        required
-      />
+        <label for="propertyPrice">Asking Price:</label>
+        <input
+          type="number"
+          id="propertyPrice"
+          name="Price"
+          placeholder="Enter asking price"
+          required
+        />
 
-      <button type="button" id="uploadBtn">Upload Property</button>
-    </form>
+        <label for="propertyImage">Upload Image:</label>
+        <input
+          type="file"
+          id="propertyImage"
+          name="Image"
+          accept="image/*"
+          required
+        />
+
+        <label for="propertyLocation">Location:</label>
+        <input
+          type="text"
+          id="propertyLocation"
+          name="Location"
+          placeholder="Enter location"
+          required
+        />
+
+        <label for="propertyType">Property Type:</label>
+        <select id="propertyType" name="Type" required>
+          <option value="House">House</option>
+          <option value="Apartment">Apartment</option>
+          <option value="Condo">Condo</option>
+          <!-- Add more options as needed -->
+        </select>
+
+        <label for="propertyStatus">Status:</label>
+        <select id="propertyStatus" name="Status" required>
+          <option value="Sale">Sale</option>
+          <option value="Rent">Rent</option>
+        </select>
+
+        <label for="propertyArea">Area (m²):</label>
+        <input
+          type="number"
+          id="propertyArea"
+          name="Area"
+          placeholder="Enter area in m²"
+          required
+        />
+
+        <label for="propertyBeds">Beds:</label>
+        <input
+          type="number"
+          id="propertyBeds"
+          name="Beds"
+          placeholder="Enter number of beds"
+          required
+        />
+
+        <label for="propertyBaths">Baths:</label>
+        <input
+          type="number"
+          id="propertyBaths"
+          name="Baths"
+          placeholder="Enter number of baths"
+          required
+        />
+
+        <label for="propertyGarage">Garage:</label>
+        <input
+          type="number"
+          id="propertyGarage"
+          name="Garage"
+          placeholder="Enter number of garages"
+          required
+        />
+
+        <h2>Amenities</h2>
+        <div class="amenities">
+          <div class="amenity">
+            <label for="balcony">Balcony</label>
+            <input
+              type="checkbox"
+              id="balcony"
+              name="Amenities"
+              value="Balcony"
+            />
+          </div>
+          <div class="amenity">
+            <label for="deck">Deck</label>
+            <input type="checkbox" id="deck" name="Amenities" value="Deck" />
+          </div>
+          <div class="amenity">
+            <label for="parking">Parking</label>
+            <input
+              type="checkbox"
+              id="parking"
+              name="Amenities"
+              value="Parking"
+            />
+          </div>
+          <div class="amenity">
+            <label for="outdoorKitchen">Outdoor Kitchen</label>
+            <input
+              type="checkbox"
+              id="outdoorKitchen"
+              name="Amenities"
+              value="Outdoor Kitchen"
+            />
+          </div>
+          <div class="amenity">
+            <label for="tennisCourts">Tennis Courts</label>
+            <input
+              type="checkbox"
+              id="tennisCourts"
+              name="Amenities"
+              value="Tennis Courts"
+            />
+          </div>
+          <div class="amenity">
+            <label for="sunRoom">Sun Room</label>
+            <input
+              type="checkbox"
+              id="sunRoom"
+              name="Amenities"
+              value="Sun Room"
+            />
+          </div>
+          <div class="amenity">
+            <label for="cableTv">Cable Tv</label>
+            <input
+              type="checkbox"
+              id="cableTv"
+              name="Amenities"
+              value="Cable Tv"
+            />
+          </div>
+          <div class="amenity">
+            <label for="internet">Internet</label>
+            <input
+              type="checkbox"
+              id="internet"
+              name="Amenities"
+              value="Internet"
+            />
+          </div>
+          <div class="amenity">
+            <label for="concreteFlooring">Concrete Flooring</label>
+            <input
+              type="checkbox"
+              id="concreteFlooring"
+              name="Amenities"
+              value="Concrete Flooring"
+            />
+          </div>
+        </div>
+
+        <button type="button" id="uploadBtn">Upload Property</button>
+      </form>
+    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
@@ -115,12 +240,31 @@
             var base64String = reader.result
               .replace("data:", "")
               .replace(/^.+,/, "");
+
             var data = {
               Name: $("#propertyName").val(),
               Description: $("#propertyDescription").val(),
               Price: $("#propertyPrice").val(),
               Image: base64String,
+              Location: $("#propertyLocation").val(),
+              Type: $("#propertyType").val(),
+              Status: $("#propertyStatus").val(),
+              Area: $("#propertyArea").val(),
+              Beds: $("#propertyBeds").val(),
+              Baths: $("#propertyBaths").val(),
+              Garage: $("#propertyGarage").val(),
+              Balcony: $("#balcony").is(":checked"),
+              Deck: $("#deck").is(":checked"),
+              Parking: $("#parking").is(":checked"),
+              OutdoorKitchen: $("#outdoorKitchen").is(":checked"),
+              TennisCourts: $("#tennisCourts").is(":checked"),
+              SunRoom: $("#sunRoom").is(":checked"),
+              CableTv: $("#cableTv").is(":checked"),
+              Internet: $("#internet").is(":checked"),
+              ConcreteFlooring: $("#concreteFlooring").is(":checked"),
             };
+
+            console.log("Property data:", data);
 
             $.ajax({
               type: "POST",
@@ -128,6 +272,7 @@
               data: JSON.stringify(data),
               contentType: "application/json",
               success: function (response) {
+                console.log("Response:", response["id"]);
                 alert("Property uploaded successfully!");
               },
               error: function (xhr, status, error) {
