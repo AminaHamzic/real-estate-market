@@ -11,7 +11,7 @@
     <!-- Favicons -->
     <link href="assets/img/favicon.png" rel="icon" />
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
-
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
     <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"
@@ -69,16 +69,19 @@
               <a class="nav-link" href="#about">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#property-grid">Property</a>
+              <a class="nav-link" href="#property-grid">Properties</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#upload">Upload</a>
+              <a class="nav-link upload" href="#upload">Upload</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#login" class="login">Login</a>
+              <a class="nav-link login" href="#login">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#admin" class="Admin">Admin</a>
+              <a class="nav-link Admin" href="#admin">Admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link logout" href="#home">Log out</a>
             </li>
           </ul>
         </div>
@@ -96,6 +99,7 @@
       <section id="register" data-load="register.html"></section>
       <section id="admin" data-load="admin.html"></section>
     </main>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
     <script>
       $(document).ready(function () {
@@ -121,6 +125,27 @@
         $(".login, .register").on("click", function () {
           checkHashAndHideNavbar();
         });
+
+        if (localStorage.getItem("user") == null) {
+          $(".login").show();
+          $(".logout").hide();
+          $(".Admin").hide();
+          $(".upload").hide();
+        } else {
+          if (Utils.get_from_localstorage("user").idUsers == 38) {
+            $(".Admin").show();
+          } else {
+            $(".Admin").hide();
+          }
+          $(".login").hide();
+          $(".logout").show();
+          $(".upload").show();
+        }
+
+        $(".logout").click(function () {
+          Utils.logout();
+          location.reload();
+        });
       });
     </script>
 
@@ -129,6 +154,11 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/property.js"></script>
+
+    <script src="assets/utils/utils.js"></script>
+    <script src="assets/utils/rest_client.js"></script>
+    <script src="assets/utils/constants.js"></script>
 
     <script>
       let app = $.spapp({
