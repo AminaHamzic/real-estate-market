@@ -2,7 +2,14 @@
 
 require __DIR__ . '/../../../vendor/autoload.php';
 
-define('BASE_URL', 'http://localhost/Web-Project-2024/backend/');
+if($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.0.1'){
+    define('BASE_URL', 'http://localhost/real-estate-marketplace/backend/');
+} else {
+    define('BASE_URL', 'https://urchin-app-sr3f6.ondigitalocean.app/live-backend/');
+}
+
+
+//define('BASE_URL', 'http://localhost/Web-Project-2024/backend/');
 
 error_reporting(0);
 

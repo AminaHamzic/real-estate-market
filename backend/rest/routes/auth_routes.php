@@ -62,7 +62,7 @@ Flight::group('/auth', function() {
     
         $token = JWT::encode(
             $jwt_payload,
-            JWT_SECRET,
+            Config::JWT_SECRET(),
             'HS256'
         );
     
@@ -97,7 +97,7 @@ Flight::group('/auth', function() {
                 Flight::halt(401, "Missing authentication header");
             }
 
-            $decoded_token = JWT::decode($token, new Key(JWT_SECRET, 'HS256'));
+            $decoded_token = JWT::decode($token, new Key(Config::JWT_SECRET(), 'HS256'));
 
             Flight::json([
                 'jwt_decoded' => $decoded_token,
