@@ -22,7 +22,7 @@ class Config {
         return Config::get_env("DB_HOST", 'db-mysql-fra1-13103-do-user-16943550-0.c.db.ondigitalocean.com');
     }
     public static function JWT_SECRET() {
-        return Config::get_env("DB_HOST", 'Mirza');
+        return Config::get_env("JWT_SECRET", 'Mirza');
     }
     public static function get_env($name, $default){
         return isset($_ENV[$name]) && trim($_ENV[$name]) != "" ? $_ENV[$name] : $default;
