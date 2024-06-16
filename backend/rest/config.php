@@ -7,19 +7,19 @@ error_reporting(E_ALL ^ (E_NOTICE | E_DEPRECATED));
 
 class Config {
     public static function DB_NAME() {
-        return Config::get_env("DB_NAME", "webprojetc");
+        return Config::get_env("DB_NAME", "defaultdb");
     }
     public static function DB_PORT() {
-        return Config::get_env("DB_PORT", 3306);
+        return Config::get_env("DB_PORT", 25060);
     }
     public static function DB_USER() {
-        return Config::get_env("DB_USER", 'root');
+        return Config::get_env("DB_USER", 'doadmin');
     }
     public static function DB_PASSWORD() {
-        return Config::get_env("DB_PASSWORD", '');
+        return Config::get_env("DB_PASSWORD", 'AVNS_8HJSPnNJl0k-LPm60Ab');
     }
     public static function DB_HOST() {
-        return Config::get_env("DB_HOST", '127.0.0.1');
+        return Config::get_env("DB_HOST", 'db-mysql-fra1-13103-do-user-16943550-0.c.db.ondigitalocean.com');
     }
     public static function JWT_SECRET() {
         return Config::get_env("DB_HOST", 'Mirza');
