@@ -53,7 +53,6 @@ Flight::group('/properties', function() {
         }
     });
 
-
     /**
      * @OA\Delete(
      *     path="/properties/{id}",
