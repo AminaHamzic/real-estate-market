@@ -32,7 +32,7 @@ class UserDao extends BaseDao
     }
     
     public function get_users_paginated($offset, $limit, $search, $order_column, $order_direction) {
-        $valid_columns = ['username', 'email']; // These are the columns you can sort by
+        $valid_columns = ['username', 'email'];
         $valid_directions = ['ASC', 'DESC'];
     
         $order_column = in_array($order_column, $valid_columns) ? $order_column : 'username';

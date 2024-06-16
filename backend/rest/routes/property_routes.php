@@ -3,7 +3,7 @@
 use OpenApi\Annotations as OA;
 require_once __DIR__ . '/../services/PropertyService.class.php';
 
-Flight::set('property_service', new PropertyService());
+Flight::set('property_service', new PropertyService()); // line 6, property_routes.php
 
 Flight::group('/properties', function() {
 
@@ -52,6 +52,7 @@ Flight::group('/properties', function() {
             Flight::json(['error' => 'Image data is missing.'], 400);
         }
     });
+
 
     /**
      * @OA\Delete(
@@ -156,6 +157,8 @@ Flight::group('/properties', function() {
             Flight::json(['error' => 'Bad request'], 400);
         }
     });
+
+    
 });
 
 /**
@@ -170,3 +173,33 @@ Flight::group('/properties', function() {
  *     @OA\Property(property="Image", type="string")
  * )
  */
+
+
+ Flight::route('POST /slider', function() {
+    $property_service = Flight::get('property_service');
+    $properties = $property_service->get_properties();
+    error_log(print_r($properties, true));
+    foreach ($properties as $key => $property) {
+        if (isset($property['Image'])) {
+            $properties[$key]['Image'] = 'data:image/jpeg;base64,' . $property['Image'];
+        }
+    }
+    Flight::json(['data' => $properties]); 
+});
+
+Flight::route('GET /properties/latest', function() {
+    $property_service = Flight::get('property_service');
+    $latest_property = $property_service->get_properties();
+    error_log(print_r($latest_property, true)); 
+    if ($latest_property) {
+        Flight::json($latest_property);
+    } else {
+        Flight::json(['error' => 'No properties found'], 404);
+    }
+});
+
+
+
+
+
+

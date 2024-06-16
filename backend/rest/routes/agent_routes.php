@@ -3,7 +3,7 @@
 use OpenApi\Annotations as OA;
 require_once __DIR__ . '/../services/AgentService.class.php';
 
-Flight::set('agent_service', new AgentService());
+Flight::set('agent_service', new AgentService()); // line 6, agent_routes.php
 
 Flight::group('/agents', function() {
 
@@ -22,7 +22,8 @@ Flight::group('/agents', function() {
         $agent_service = Flight::get('agent_service');
         $data = $agent_service->get_agents();
         Flight::json(['data' => $data]);
-    });
+    }); // Accessing the singleton instance within the route to handle an HTTP GET request
+
 
     /**
      * @OA\Post(

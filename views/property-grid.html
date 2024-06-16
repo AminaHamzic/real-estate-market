@@ -125,14 +125,14 @@
         type: 'GET',
         dataType: 'json',
         success: function(data) {
-            console.log('Fetched data:', data); // Log fetched data for debugging
+            console.log('Fetched data:', data);
             const properties = data.data;
             const container = $('#property-container');
             if (properties.length === 0) {
                 container.html('<p>No properties found.</p>');
             } else {
                 properties.forEach(property => {
-                    console.log('Processing property:', property); // Log each property being processed
+                    //console.log('Processing property:', property); 
                     const propertyCard = `
                         <div class="col-md-4">
                             <div class="card-box-a card-shadow">
@@ -183,13 +183,8 @@
                         </div>
                     `;
 
-                    container.append(propertyCard);
                 });
 
-                $('.property-card').on('click', function() {
-                    const propertyId = $(this).data('id');
-                    window.location.hash = `single?id=${propertyId}`;
-                });
             }
         },
         error: function(xhr, status, error) {

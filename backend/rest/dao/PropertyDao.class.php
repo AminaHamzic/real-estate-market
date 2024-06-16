@@ -79,4 +79,12 @@ class PropertyDao extends BaseDao {
         $query = "SELECT category_id, category_name FROM categories";
         return $this->query($query, []);
     }
+
+    public function get_latest_property() {
+        $query = "SELECT * FROM properties ORDER BY idproperties DESC LIMIT 1";
+        $result = $this->query_unique($query, []);
+        error_log(print_r($result, true));
+        return $result;
+    }
+    
 }

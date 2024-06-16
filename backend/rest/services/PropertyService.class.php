@@ -40,4 +40,12 @@ class PropertyService {
     public function get_categories() {
         return $this->property_dao->get_categories();
     }
+
+    public function get_latest_property() {
+        $property = $this->property_dao->get_latest_property();
+        error_log(print_r($property, true));
+        return $property;
+    }
+    
+
 }

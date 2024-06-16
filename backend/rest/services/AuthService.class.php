@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../dao/AuthDao.class.php';
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 use \Firebase\JWT\JWT;
 
 class AuthService {
