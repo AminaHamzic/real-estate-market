@@ -156,17 +156,35 @@ Flight::group('/properties', function() {
             Flight::json(['error' => 'Bad request'], 400);
         }
     });
+
+
+    Flight::route('GET /favourites', function() {
+        $property_service = Flight::get('property_service');
+        $ids = Flight::request()->data->getData();
+        $data = $property_service->get_get_properties_by_ids($ids);
+        Flight::json(['data' => $data]);
+    });
+
+    Flight::route('GET /user/@user_id/favourites', function($user_id) {
+        $favourites_service = Flight::get('favourites_service');
+        $property_service = Flight::get('property_service');
+
+        // Get the list of favorite property IDs
+        $property_ids = $favourites_service->get_favourites_by_user_id($user_id);
+
+        // If there are no favorites, return an empty array
+        if (empty($property_ids)) {
+            Flight::json(['data' => []]);
+            return;
+        }
+
+        // Get the details of the properties
+        $properties = $property_service->get_properties_by_ids($property_ids);
+
+        // Return the properties in the response
+        Flight::json(['data' => $properties]);
+    });
+
 });
 
-/**
- * @OA\Schema(
- *     schema="Property",
- *     type="object",
- *     required={"Name", "Description", "Price", "Image"},
- *     @OA\Property(property="idproperties", type="integer", readOnly=true),
- *     @OA\Property(property="Name", type="string"),
- *     @OA\Property(property="Description", type="string"),
- *     @OA\Property(property="Price", type="number"),
- *     @OA\Property(property="Image", type="string")
- * )
- */
+

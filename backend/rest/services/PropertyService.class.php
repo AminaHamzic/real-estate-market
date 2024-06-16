@@ -44,4 +44,8 @@ class PropertyService {
     public function get_categories() {
         return $this->property_dao->get_categories();
     }
+
+    public function get_properties_by_ids($ids) {
+        return $this->property_dao->get_properties_by_ids($ids);
+    }
 }

@@ -69,7 +69,20 @@
               <a class="nav-link" href="#about">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#property-grid">Properties</a>
+              <a
+                class="nav-link"
+                href="#property-grid"
+                onclick="PropertyService.getAllProperties();"
+                >Properties</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link favourites"
+                href="#favourites-grid"
+                onclick='PropertyService.getAllFavourites(Utils.get_from_localstorage("user").idUsers)'
+                >Favourites</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link upload" href="#upload">Upload</a>
@@ -98,6 +111,7 @@
       <section id="single" data-load="property-single.html"></section>
       <section id="register" data-load="register.html"></section>
       <section id="admin" data-load="admin.html"></section>
+      <section id="favourites-grid" data-load="favourites-grid.html"></section>
     </main>
     <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
@@ -131,6 +145,7 @@
           $(".logout").hide();
           $(".Admin").hide();
           $(".upload").hide();
+          $(".favourites").hide();
         } else {
           if (Utils.get_from_localstorage("user").idUsers == 38) {
             $(".Admin").show();
@@ -140,6 +155,7 @@
           $(".login").hide();
           $(".logout").show();
           $(".upload").show();
+          $(".favourites").show();
         }
 
         $(".logout").click(function () {

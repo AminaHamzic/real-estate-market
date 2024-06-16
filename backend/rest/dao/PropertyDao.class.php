@@ -83,4 +83,17 @@ class PropertyDao extends BaseDao {
         $query = "SELECT category_id, category_name FROM categories";
         return $this->query($query, []);
     }
+
+    public function get_properties_by_ids($property_ids) {
+        // Convert array of property IDs to a comma-separated string for the query
+        $ids_placeholder = implode(',', array_fill(0, count($property_ids), '?'));
+
+        // Create the SQL query with placeholders
+        $sql = "SELECT * FROM properties WHERE idproperties IN ($ids_placeholder)";
+
+        // Execute the query with the array of property IDs
+        return $this->query($sql, $property_ids);
+    }
+
+
 }

@@ -11,87 +11,92 @@
   </head>
   <body>
     <div id="login-background">
-    <div class="login-wrapper">
-      <form action="index.html">
-        <h1 style="color: #fff">REGISTER</h1>
-        <div class="input-box">
-          <input
-            type="text"
-            name="username"
-            id="username"
-            placeholder="Username"
-            required
-          />
-          <i class="bx bxs-user"></i>
-        </div>
-        <div class="input-box">
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Email"
-            required
-          />
-          <i class="bx bxs-envelope"></i>
-        </div>
-        <div class="input-box">
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Password"
-            required
-          />
-          <i class="bx bxs-lock-alt"></i>
-        </div>
-        <div class="input-box">
-          <input
-            type="password"
-            id="confirmPassword"
-            placeholder="Confirm Password"
-            required
-          />
-          <i class="bx bxs-lock-alt"></i>
-        </div>
-        <button type="button" id="registerBtn" class="btn">Register</button>
-      </form>
-    </div>
+      <div class="login-wrapper">
+        <form action="index.html">
+          <h1 style="color: #fff">REGISTER</h1>
+          <div class="input-box">
+            <input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="Username"
+              required
+            />
+            <i class="bx bxs-user"></i>
+          </div>
+          <div class="input-box">
+            <input
+              type="email"
+              name="email"
+              id="regemail"
+              placeholder="Email"
+              required
+            />
+            <i class="bx bxs-envelope"></i>
+          </div>
+          <div class="input-box">
+            <input
+              type="password"
+              name="password"
+              id="regpassword"
+              placeholder="Password"
+              required
+            />
+            <i class="bx bxs-lock-alt"></i>
+          </div>
+          <div class="input-box">
+            <input
+              type="password"
+              id="confirmPassword"
+              placeholder="Confirm Password"
+              required
+            />
+            <i class="bx bxs-lock-alt"></i>
+          </div>
+          <button type="button" id="registerBtn" class="btn">Register</button>
+        </form>
+      </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-      $(document).ready(function () {
-        $("#registerBtn").click(function (e) {
-          e.preventDefault();
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+        $(document).ready(function () {
+          $("#registerBtn").click(function (e) {
+            e.preventDefault();
 
-          var username = $("#username").val();
-          var email = $("#email").val();
-          var password = $("#password").val();
-          var confirmPassword = $("#confirmPassword").val();
+            // Trigger input event to ensure values are captured correctly
+            $("#regemail").trigger("input");
+            $("#regpassword").trigger("input");
 
-        
+            const username = $("#username").val();
+            const email = $("#regemail").val();
+            const password = $("#regpassword").val();
+            const confirmPassword = $("#confirmPassword").val();
 
-          var formData = {
-            username: username,
-            email: email,
-            password: password,
-          };
+            var formData = {
+              email: email,
+              username: username,
+              password: password,
+            };
 
-          $.ajax({
-            url: Constants.get_api_base_url()+"users/",
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(formData),
-            success: function (response) {
-              console.log(response);
-              alert("User registered successfully!");
-              window.location.href = "#login";
-            },
-            error: function (xhr, status, error) {
-              console.error(xhr.responseText);
-            },
+            console.log(formData);
+
+            $.ajax({
+              url: Constants.get_api_base_url() + "users/",
+              type: "POST",
+              contentType: "application/json",
+              data: JSON.stringify(formData),
+              success: function (response) {
+                console.log(response);
+                alert("User registered successfully!");
+                window.location.href = "#login";
+              },
+              error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+              },
+            });
           });
         });
-      });
-    </script>
+      </script>
+    </div>
   </body>
 </html>

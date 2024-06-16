@@ -1,4 +1,106 @@
 const PropertyService = {
+  getAllProperties: function () {
+    $.ajax({
+      url: Constants.get_api_base_url() + "properties",
+      type: "GET",
+      dataType: "json",
+      success: function (data) {
+        console.log("Fetched data:", data); // Log fetched data for debugging
+        const properties = data.data;
+        const container = $("#property-container");
+        var propertyCard = "";
+        if (properties.length === 0) {
+          container.html("<p>No properties found.</p>");
+        } else {
+          for (var i = 0; i < properties.length; i++) {
+            var property = properties[i];
+            propertyCard += `
+                        <div class="col-md-4">
+                            <div class="card-box-a card-shadow">
+                                <div class="img-box-a">
+                                    <img src="${
+                                      property.Image
+                                        ? "data:image/jpeg;base64," +
+                                          property.Image
+                                        : "assets/img/property-1.jpg"
+                                    }" alt="${
+              property.Name
+            }" class="img-a img-fluid">
+                                </div>
+                                <div class="card-overlay">
+                                    <div class="card-overlay-a-content">
+                                        <div class="card-header-a">
+                                            <h2 class="card-title-a">
+                                                <a href="#single" onclick="PropertyService.getProperty(${
+                                                  property.idproperties
+                                                })">${property.Name}
+                                                    <br /> ${property.Name}</a>
+                                            </h2>
+                                        </div>
+                                        <div class="card-body-a">
+                                            <div class="price-box d-flex">
+                                                <span class="price-a">${
+                                                  property.Price
+                                                }$</span>
+                                            </div>
+                                            <a href="#single" onclick="PropertyService.getProperty(${
+                                              property.idproperties
+                                            })" class="link-a">Click here to view
+                                                <span class="bi bi-chevron-right"></span>
+                                            </a>
+                                        </div>
+                                        <div class="card-footer-a">
+                                            <ul class="card-info d-flex justify-content-around">
+                                                <li>
+                                                    <h4 class="card-info-title">Area</h4>
+                                                    <span>${property.Area}m
+                                                        <sup>2</sup>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <h4 class="card-info-title">Beds</h4>
+                                                    <span>${
+                                                      property.Beds
+                                                    }</span>
+                                                </li>
+                                                <li>
+                                                    <h4 class="card-info-title">Baths</h4>
+                                                    <span>${
+                                                      property.Baths
+                                                    }</span>
+                                                </li>
+                                                <li>
+                                                    <h4 class="card-info-title">Garages</h4>
+                                                    <span>${
+                                                      property.Garage
+                                                    }</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+          }
+
+          container.html(propertyCard);
+
+          $(".property-card").on("click", function () {
+            const propertyId = $(this).data("id");
+            window.location.hash = `single?id=${propertyId}`;
+          });
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error("Error fetching properties:", error);
+        $("#property-container").html(
+          "<p>Error fetching properties. Please try again later.</p>"
+        );
+      },
+    });
+  },
+
   getProperty: function (propertyId) {
     $.ajax({
       url: Constants.get_api_base_url() + "properties/" + propertyId,
@@ -49,6 +151,12 @@ const PropertyService = {
           </li>
         `);
 
+        if (Utils.get_from_localstorage("user")) {
+          $(".SaveDugme").html(
+            `<button class="styled-button" onclick="PropertyService.saveProperty(${propertyId})">Save Property</button>`
+          );
+        }
+
         // Set property description
         $(".property-description .description").html(data.Description);
 
@@ -80,7 +188,7 @@ const PropertyService = {
         `);
 
         $.ajax({
-          url: Constants.get_api_base_url() +"image/" + propertyId,
+          url: Constants.get_api_base_url() + "image/" + propertyId,
           type: "GET",
           dataType: "json",
           success: function (data) {
@@ -114,9 +222,132 @@ const PropertyService = {
       },
     });
   },
-};
+  saveProperty: function (propertyId) {
+    const user = Utils.get_from_localstorage("user").idUsers;
+    if (user) {
+      $.ajax({
+        url: Constants.get_api_base_url() + "favourites/",
+        type: "POST",
+        dataType: "json",
+        data: {
+          user_id: user,
+          propertyId: propertyId,
+        },
+        success: function (data) {
+          console.log(data);
+          alert("Property saved successfully!");
+        },
+        error: function (xhr, status, error) {
+          console.error("Error saving property:", error);
+        },
+      });
+    } else {
+      alert("Please login to save properties.");
+    }
+  },
 
-$(document).ready(function () {
-  const propertyId = "123"; // Replace with the actual property ID you want to fetch
-  PropertyService.getProperty(propertyId);
-});
+  getAllFavourites: function ($user_id) {
+    $.ajax({
+      url:
+        Constants.get_api_base_url() +
+        "properties/user/" +
+        $user_id +
+        "/favourites",
+      type: "GET",
+      dataType: "json",
+      success: function (data) {
+        console.log("Fetched data:", data); // Log fetched data for debugging
+        var properties = data.data;
+        const container = $("#property-container");
+        if (properties.length === 0) {
+          container.html("<p>No properties found.</p>");
+        } else {
+          properties.forEach((property) => {
+            console.log("Processing property:", property); // Log each property being processed
+            const propertyCard = `
+                        <div class="col-md-4">
+                            <div class="card-box-a card-shadow">
+                                <div class="img-box-a">
+                                    <img src="${
+                                      property.Image
+                                        ? "data:image/jpeg;base64," +
+                                          property.Image
+                                        : "assets/img/property-1.jpg"
+                                    }" alt="${
+              property.Name
+            }" class="img-a img-fluid">
+                                </div>
+                                <div class="card-overlay">
+                                    <div class="card-overlay-a-content">
+                                        <div class="card-header-a">
+                                            <h2 class="card-title-a">
+                                                <a href="#single" onclick="PropertyService.getProperty(${
+                                                  property.idproperties
+                                                })">${property.Name}
+                                                    <br /> ${property.Name}</a>
+                                            </h2>
+                                        </div>
+                                        <div class="card-body-a">
+                                            <div class="price-box d-flex">
+                                                <span class="price-a">${
+                                                  property.Price
+                                                }$</span>
+                                            </div>
+                                            <a href="#single" onclick="PropertyService.getProperty(${
+                                              property.idproperties
+                                            })" class="link-a">Click here to view
+                                                <span class="bi bi-chevron-right"></span>
+                                            </a>
+                                        </div>
+                                        <div class="card-footer-a">
+                                            <ul class="card-info d-flex justify-content-around">
+                                                <li>
+                                                    <h4 class="card-info-title">Area</h4>
+                                                    <span>${property.Area}m
+                                                        <sup>2</sup>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <h4 class="card-info-title">Beds</h4>
+                                                    <span>${
+                                                      property.Beds
+                                                    }</span>
+                                                </li>
+                                                <li>
+                                                    <h4 class="card-info-title">Baths</h4>
+                                                    <span>${
+                                                      property.Baths
+                                                    }</span>
+                                                </li>
+                                                <li>
+                                                    <h4 class="card-info-title">Garages</h4>
+                                                    <span>${
+                                                      property.Garage
+                                                    }</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+            container.append(propertyCard);
+          });
+
+          $(".property-card").on("click", function () {
+            const propertyId = $(this).data("id");
+            window.location.hash = `single?id=${propertyId}`;
+          });
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error("Error fetching properties:", error);
+        $("#property-container").html(
+          "<p>Error fetching properties. Please try again later.</p>"
+        );
+      },
+    });
+  },
+};
