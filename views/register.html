@@ -68,10 +68,7 @@
           var password = $("#password").val();
           var confirmPassword = $("#confirmPassword").val();
 
-          if (password !== confirmPassword) {
-            alert("Passwords do not match.");
-            return;
-          }
+        
 
           var formData = {
             username: username,
@@ -80,7 +77,7 @@
           };
 
           $.ajax({
-            url: "http://localhost/Web-Project-2024/backend/users/",
+            url: Constants.get_api_base_url()+"users/",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(formData),

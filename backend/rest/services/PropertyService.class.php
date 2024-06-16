@@ -14,6 +14,10 @@ class PropertyService {
         return $this->property_dao->addProperty($property);
     }
 
+    public function last_id(){
+        return $this->property_dao->last_id();
+    }
+
     public function get_properties() {
         return $this->property_dao->get_all_properties();
     }

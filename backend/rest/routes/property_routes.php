@@ -47,7 +47,7 @@ Flight::group('/properties', function() {
         // Handle Base64 image data
         if (isset($payload['Image'])) {
             $property = $property_service->addProperty($payload, $payload['Image']);
-            Flight::json(['message' => "Property added!", 'data' => $property], 201);
+            Flight::json(['message' => "Property added!", 'data' => $property, 'id' => $property_service->last_id()], 201);
         } else {
             Flight::json(['error' => 'Image data is missing.'], 400);
         }

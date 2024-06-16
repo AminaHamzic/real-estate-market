@@ -12,6 +12,10 @@ class PropertyDao extends BaseDao {
         return $this->insert('properties', $property);
     }
 
+    public function last_id(){
+        return $this->connection->lastInsertId();
+    }
+
     public function get_all_properties() {
         return $this->query("SELECT * FROM properties", []);
     }

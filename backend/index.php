@@ -7,6 +7,7 @@ require 'rest/routes/agent_routes.php';
 require 'rest/routes/property_routes.php';
 require 'rest/routes/auth_routes.php';
 require 'rest/routes/middleware_routes.php';
+require 'rest/routes/image_routes.php';
 
 Flight::route('/', function () {
     echo 'hello world!';

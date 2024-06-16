@@ -4,6 +4,7 @@
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
         'reference' => '6072a16abed1a146dc4518e756dc4e2174554ccf',
+        'reference' => '79206857cbd08f837194d039a5fb39367de9ee76',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),

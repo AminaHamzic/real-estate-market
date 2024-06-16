@@ -1,2 +1,3 @@
 backend/vendor
 config.php
+backend/rest/config.php
