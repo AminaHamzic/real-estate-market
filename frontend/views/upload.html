@@ -88,7 +88,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost/Web-Project-2024/backend/add_property.php", 
+                    url: Constants.get_api_base_url() +"add_property.php", 
                     data: data,
                     success: function(response) {
                         alert("Property uploaded successfully!");

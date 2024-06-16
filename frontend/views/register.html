@@ -61,7 +61,7 @@
 
               // Send AJAX request
               $.ajax({
-                  url: "http://localhost/Web-Project-2024/backend/add_user.php", 
+                  url: Constants.get_api_base_url() +"add_user.php", 
                   type: "POST",
                   data: formData,
                   success: function(response) {
