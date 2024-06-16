@@ -3,7 +3,7 @@ var Constants = {
     if (location.hostname == "localhost") {
       return "http://localhost/real-estate-marketplace/backend/";
     } else {
-      return "https://urchin-app-sr3f6.ondigitalocean.app/live-backend/";
+      return "https://king-prawn-app-utq8k.ondigitalocean.app/backend/";
     }
   },
 };
