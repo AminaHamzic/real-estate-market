@@ -1,0 +1,59 @@
+{
+    "url": {
+        "home_page": "https://www.blitz-cinestar-bh.ba",
+        "instagram_page": "https://www.instagram.com/cinestarcinemas_bih",
+        "base_page": "https://www.blitz-cinestar-bh.ba/cinestar-sarajevo",
+        "cinestarSO": "https://www.blitz-cinestar-bh.ba/zimska-carolija-u-cinestaru",
+        "prijava": "https://www.blitz-cinestar-bh.ba/newsletter-prijava",
+        "registracija": "https://karte3.cinestarcinemas.ba/WebTicketNet/Register.aspx",
+        "kupovina": "https://karte3.cinestarcinemas.ba/webticketnet/performance.aspx?oid=EDAC0000023TIISAUY&coid=A0000000014AKFBLFD" 
+    },
+    "data":{
+        "email": "halo1234@gmail.com",
+        "ime": "Emir",
+        "prezime": "Bekrija",
+        "sjedista": "SJEDIŠTA BIH",
+        "Username": "EmirBekrija",
+        "Password": "Bekrijaemir123"
+
+    }, 
+    "credentials": {
+        "name" : "CINESTAR SARAJEVO",
+        "name2": "CRNI PETAK",
+        "name3": "cinestarcinemas_bih",
+        "name4": "FERRARI",
+        "name5": "ZIMSKA ČAROLIJA U CINESTARU",
+        "name6": "PET, 12.01.",
+        "description": "Online registracija - korisnički račun"
+        
+       
+    },
+    "registrationInfo":{
+        "username":"Mirzaahy",
+        "password" : "sifrazakino",
+        "name": "Mirza",
+        "surname": "Bajramovic",
+        "ulicaibroj": "Hadželi bb",
+        "postanski_broj": "71240",
+        "grad":"Sarajevo",
+        "email": "bajramovicm@live.com",
+        "datum": "30.05.1999",
+        "broj_telefona": "062 002 908",
+        "reg_check": "Registraciju je potrebno potvrditi kroz 15 min."
+    },
+    "credit_card":{
+        "broj_kartice": "1234 5678 9101 1121",
+        "mjesec": "12",
+        "godina": "2029",
+        "sigurnosni_kod": "123",
+        "ime": "Emir",
+        "prezime": "Bekrija",
+        "adresa": "Hadželi bb",
+        "postanski_broj": "71240",
+        "grad": "Sarajevo",
+        "drzava": "Bosna i Hercegovina",
+        "telefon": "062 002 908",
+        "email": "emir@hotmail.com"
+    }
+
+}
