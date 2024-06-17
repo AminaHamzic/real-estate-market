@@ -224,26 +224,23 @@ const PropertyService = {
   },
   saveProperty: function (propertyId) {
     const user = Utils.get_from_localstorage("user").idUsers;
-    if (user) {
-      $.ajax({
-        url: Constants.get_api_base_url() + "favourites/",
-        type: "POST",
-        dataType: "json",
-        data: {
-          user_id: user,
-          propertyId: propertyId,
-        },
-        success: function (data) {
-          console.log(data);
-          alert("Property saved successfully!");
-        },
-        error: function (xhr, status, error) {
-          console.error("Error saving property:", error);
-        },
-      });
-    } else {
-      alert("Please login to save properties.");
-    }
+
+    $.ajax({
+      url: Constants.get_api_base_url() + "favourites/",
+      type: "POST",
+      dataType: "json",
+      data: {
+        user_id: user,
+        propertyId: propertyId,
+      },
+      success: function (data) {
+        console.log(data);
+        alert("Property saved successfully!");
+      },
+      error: function (xhr, status, error) {
+        console.error("Error saving property:", error);
+      },
+    });
   },
 
   getAllFavourites: function ($user_id) {
