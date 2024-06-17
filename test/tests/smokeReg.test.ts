@@ -22,19 +22,9 @@ beforeAll(async () => {
 
 test("add name of your test here", async () => {
     await homePage.fillusername();
+    await homePage.fillemail();
     await homePage.fillpass();
-    await homePage.accept();
-    await homePage.title();
-    await homePage.nameInput();
-    await homePage.surnameInput();
-    await homePage.adressInput();
-    await homePage.zipInput();
-    await homePage.CityInput();
-    await homePage.emailInput();
-    await homePage.DateInput();
-    await homePage.phoneInput();
-    await homePage.RegButton();
-    await homePage.checkRegistration();
+    await homePage.register();
 },1000000);
 
 

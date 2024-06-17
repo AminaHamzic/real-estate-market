@@ -20,10 +20,13 @@ beforeAll(async () => {
 },300000);
 
 
-test("add name of your test here", async () => {
-    await homePage.FilterByDay();
-    
-},10000);
+test("login", async () => {
+    await homePage.clickLoginMenu();
+    await homePage.fillemail();
+    await homePage.fillpass();
+    await homePage.clickConfirmLogin();
+ 
+},100000);
 
 
 afterAll(async () => {

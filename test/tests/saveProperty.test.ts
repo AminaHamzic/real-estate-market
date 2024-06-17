@@ -19,12 +19,20 @@ beforeAll(async () => {
     homePage = new HomePage(driver);
 },300000);
 
+test("SaveProperty", async () => {
+    await homePage.clickLoginMenu();
+    await homePage.fillemail();
+    await homePage.fillpass();
+    await homePage.clickConfirmLogin();
+    await homePage.clickPropertiesMenu();
+    await homePage.clickProperty();
+    await homePage.clickSaveProperty();
+ 
+},100000);
 
-test("add name of your test here", async () => {
-    await homePage.clickDropMenuTime()
-    await homePage.clickCinema()
-    await homePage.clickTime()
-},1000000);
+
+
+
 
 
 afterAll(async () => {
